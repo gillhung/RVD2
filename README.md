@@ -17,7 +17,9 @@ Step 6  MediaPipe 33 → COCO 17
 
 Step 7  keypoint_image.py 
 
-Step 8  訓練 A-HRNet
+Step 8 split 訓練資料與驗證資料
+
+Step 9  訓練 A-HRNet
 
 output: 有標記點的 圖片 & json
 
