@@ -3,119 +3,96 @@ import cv2
 import json
 
 # 1️⃣ 基本路徑設定
-
 current_dir = os.path.dirname(os.path.abspath(__file__))
+json_root = os.path.join(current_dir, "annotations", "yolo_boxes")
+image_root = os.path.join(current_dir, "dataset", "images")
+output_root = os.path.join(current_dir, "dataset", "single_person_images")
 
-json_dir = os.path.join(current_dir, "annotations", "yolo_boxes")
-image_dir = os.path.join(current_dir, "dataset", "images")
-output_dir = os.path.join(current_dir, "dataset", "single_person_images")
+os.makedirs(output_root, exist_ok=True)
 
-os.makedirs(output_dir, exist_ok=True)
+# 2️⃣ 找出所有 JSON 任務
+tasks = []
+for root, dirs, files in os.walk(json_root):
+    for file in files:
+        if file.endswith(".json"):
+            # JSON 完整路徑
+            json_path = os.path.join(root, file)
+            # 取得相對路徑（例如 "dance/image1.json" 中的 "dance"）
+            rel_path = os.path.relpath(root, json_root)
+            
+            # 對應圖片的路徑
+            img_name = os.path.splitext(file)[0] + ".jpg"
+            img_path = os.path.join(image_root, rel_path, img_name)
+            
+            # 輸出的資料夾結構
+            out_dir = os.path.join(output_root, rel_path)
+            
+            tasks.append({
+                "json_path": json_path,
+                "img_path": img_path,
+                "out_dir": out_dir,
+                "base_name": os.path.splitext(file)[0]
+            })
 
-print("📂 JSON資料夾:", json_dir)
-print("📂 圖片資料夾:", image_dir)
-print("📂 輸出資料夾:", output_dir)
+print(f"📊 找到 {len(tasks)} 個 JSON 任務")
 
-# 2️⃣ 檢查資料夾
-
-if not os.path.exists(json_dir):
-    print("❌ 找不到 JSON 資料夾")
-    exit()
-
-if not os.path.exists(image_dir):
-    print("❌ 找不到圖片資料夾")
-    exit()
-
-# 3️⃣ 讀取 JSON 檔
-
-json_files = [f for f in os.listdir(json_dir) if f.endswith(".json")]
-
-print(f"📊 找到 {len(json_files)} 個 JSON")
-
-if len(json_files) == 0:
-    print("❌ 沒有 JSON")
-    exit()
-
-# 4️⃣ 開始處理
-
+# 3️⃣ 開始處理
 success_count = 0
 
-for json_file in json_files:
-
-    json_path = os.path.join(json_dir, json_file)
-
-    # 讀 JSON
+for t in tasks:
+    # 讀取 JSON
     try:
-        with open(json_path, 'r') as f:
+        with open(t["json_path"], 'r') as f:
             bboxes = json.load(f)
     except Exception as e:
-        print("❌ JSON讀取失敗:", json_file, e)
+        print(f"❌ JSON 讀取失敗: {t['json_path']} | {e}")
         continue
 
-    # 對應圖片
-    img_name = os.path.splitext(json_file)[0] + ".jpg"
-    img_path = os.path.join(image_dir, img_name)
-
-    img = cv2.imread(img_path)
-
+    # 讀取圖片
+    img = cv2.imread(t["img_path"])
     if img is None:
-        print("❌ 讀不到圖片:", img_name)
-        continue
+        # 有時候可能是 .png，嘗試換個副檔名看看
+        t["img_path"] = t["img_path"].replace(".jpg", ".png")
+        img = cv2.imread(t["img_path"])
+        if img is None:
+            print(f"❌ 讀不到圖片: {t['img_path']}")
+            continue
 
     if not isinstance(bboxes, list) or len(bboxes) == 0:
-        print("⚠ 沒有bbox:", json_file)
         continue
 
-    # ⭐ 依面積排序（前面的人 = person1）
+    # 面積排序 (大的優先)
+    bboxes = sorted(bboxes, key=lambda b: (b[2] - b[0]) * (b[3] - b[1]), reverse=True)
 
-    try:
-        bboxes = sorted(
-            bboxes,
-            key=lambda b: (b[2] - b[0]) * (b[3] - b[1]),
-            reverse=True
-        )
-    except:
-        print("❌ bbox格式錯誤:", json_file)
-        continue
-
-    # 5️⃣ 裁切每個人
+    # 建立對應的輸出資料夾
+    os.makedirs(t["out_dir"], exist_ok=True)
 
     h, w = img.shape[:2]
 
+    # 4️⃣ 裁切每個人
     for i, box in enumerate(bboxes):
-
         try:
             x1, y1, x2, y2 = map(int, box)
+            # 防止超出邊界
+            x1, y1, x2, y2 = max(0, x1), max(0, y1), min(w, x2), min(h, y2)
+            
+            person_img = img[y1:y2, x1:x2]
+            if person_img.size == 0: continue
+
+            # 命名與路徑
+            save_name = f"{t['base_name']}_person{i+1}.jpg"
+            save_path = os.path.join(t["out_dir"], save_name)
+
+            # 解決中文路徑存檔
+            result, encoded = cv2.imencode(".jpg", person_img)
+            if result:
+                encoded.tofile(save_path)
+                success_count += 1
         except:
-            print("❌ bbox錯誤:", json_file)
             continue
 
-        # 防止超出邊界
-        x1 = max(0, x1)
-        y1 = max(0, y1)
-        x2 = min(w, x2)
-        y2 = min(h, y2)
+    print(f"✅ 已處理: {t['base_name']}")
 
-        person_img = img[y1:y2, x1:x2]
-
-        if person_img.size == 0:
-            print("❌ 裁切失敗:", img_name)
-            continue
-
-        # ⭐ 命名：person1, person2...
-        save_name = f"{os.path.splitext(img_name)[0]}_person{i+1}.jpg"
-        save_path = os.path.join(output_dir, save_name)
-
-        # ⭐ 解決中文路徑
-        result, encoded = cv2.imencode(".jpg", person_img)
-        if result:
-            encoded.tofile(save_path)
-            success_count += 1
-        else:
-            print("❌ 存檔失敗:", save_name)
-
-# 6️⃣ 完成
-
-print("\n===== 🎉 完成 =====")
-print("成功輸出圖片數:", success_count)
-print("輸出資料夾:", output_dir)
+print("\n===== 🎉 任務完成 =====")
+print(f"成功輸出總人數圖片: {success_count}")
+print(f"結果存放在: {output_root}")
