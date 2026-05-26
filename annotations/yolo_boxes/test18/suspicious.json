@@ -1,0 +1,18 @@
+[
+  {
+    "frame": "test18_00001.jpg",
+    "reason": "ID 消失:[-1]，新出現:[114]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test18_00082.jpg",
+    "reason": "ID 消失:[116]，新出現:[115]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test18_00104.jpg",
+    "reason": "ID 消失:[121]，新出現:[116]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test18_00106.jpg",
+    "reason": "ID 消失:[116]，新出現:[121]，可能發生 ID Switch"
+  }
+]

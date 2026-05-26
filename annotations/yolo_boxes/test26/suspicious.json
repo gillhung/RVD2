@@ -1,0 +1,46 @@
+[
+  {
+    "frame": "test26_00001.jpg",
+    "reason": "ID 消失:[-1]，新出現:[192, 193]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00150.jpg",
+    "reason": "ID 消失:[198]，新出現:[197]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00151.jpg",
+    "reason": "ID 消失:[197]，新出現:[198]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00153.jpg",
+    "reason": "ID 消失:[198]，新出現:[197]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00158.jpg",
+    "reason": "ID 消失:[197]，新出現:[198]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00160.jpg",
+    "reason": "ID 消失:[198]，新出現:[197]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00166.jpg",
+    "reason": "ID 消失:[197]，新出現:[198]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00170.jpg",
+    "reason": "ID 消失:[198]，新出現:[197]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00323.jpg",
+    "reason": "ID 消失:[199]，新出現:[201]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00326.jpg",
+    "reason": "ID 消失:[199]，新出現:[201]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test26_00340.jpg",
+    "reason": "ID 消失:[201]，新出現:[199]，可能發生 ID Switch"
+  }
+]

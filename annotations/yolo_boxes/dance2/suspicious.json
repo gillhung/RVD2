@@ -1,0 +1,26 @@
+[
+  {
+    "frame": "dance2_00001.jpg",
+    "reason": "ID 消失:[-1]，新出現:[9, 10, 11]，可能發生 ID Switch"
+  },
+  {
+    "frame": "dance2_00057.jpg",
+    "reason": "ID 消失:[9]，新出現:[10]，可能發生 ID Switch"
+  },
+  {
+    "frame": "dance2_00059.jpg",
+    "reason": "ID 消失:[14]，新出現:[10, 13]，可能發生 ID Switch"
+  },
+  {
+    "frame": "dance2_00060.jpg",
+    "reason": "ID 消失:[10]，新出現:[14]，可能發生 ID Switch"
+  },
+  {
+    "frame": "dance2_00061.jpg",
+    "reason": "ID 消失:[13]，新出現:[10]，可能發生 ID Switch"
+  },
+  {
+    "frame": "dance2_00074.jpg",
+    "reason": "ID 消失:[22]，新出現:[16]，可能發生 ID Switch"
+  }
+]

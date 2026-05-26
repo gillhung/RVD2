@@ -1,0 +1,58 @@
+[
+  {
+    "frame": "test23_00001.jpg",
+    "reason": "ID 消失:[-1]，新出現:[155]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00231.jpg",
+    "reason": "ID 消失:[155]，新出現:[156]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00253.jpg",
+    "reason": "ID 消失:[156]，新出現:[155]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00289.jpg",
+    "reason": "ID 消失:[155]，新出現:[161]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00294.jpg",
+    "reason": "ID 消失:[161]，新出現:[155]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00297.jpg",
+    "reason": "ID 消失:[155]，新出現:[161]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00299.jpg",
+    "reason": "ID 消失:[161]，新出現:[155]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00302.jpg",
+    "reason": "ID 消失:[155]，新出現:[161]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00303.jpg",
+    "reason": "ID 消失:[161]，新出現:[155]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00330.jpg",
+    "reason": "ID 消失:[156]，新出現:[161]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00356.jpg",
+    "reason": "ID 消失:[161]，新出現:[156]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00357.jpg",
+    "reason": "ID 消失:[156]，新出現:[161]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00359.jpg",
+    "reason": "ID 消失:[161]，新出現:[156]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test23_00361.jpg",
+    "reason": "ID 消失:[156]，新出現:[161]，可能發生 ID Switch"
+  }
+]

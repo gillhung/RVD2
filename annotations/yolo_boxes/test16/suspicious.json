@@ -1,0 +1,30 @@
+[
+  {
+    "frame": "test16_00001.jpg",
+    "reason": "ID 消失:[-1]，新出現:[66, 67]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test16_00280.jpg",
+    "reason": "ID 消失:[70]，新出現:[80, 75]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test16_00281.jpg",
+    "reason": "ID 消失:[80, 75]，新出現:[81, 70]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test16_00282.jpg",
+    "reason": "ID 消失:[81]，新出現:[80, 75]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test16_00283.jpg",
+    "reason": "ID 消失:[80, 70]，新出現:[81]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test16_00305.jpg",
+    "reason": "ID 消失:[-1]，新出現:[88]，可能發生 ID Switch"
+  },
+  {
+    "frame": "test16_00323.jpg",
+    "reason": "ID 消失:[88, 90, 95]，新出現:[-1]，可能發生 ID Switch"
+  }
+]
